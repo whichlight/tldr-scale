@@ -1,0 +1,30 @@
+{
+  "articles": [
+    {
+      "title": "Article 1 Title",
+      "url": "https://example.com/article1",
+      "summaries": [
+        {
+          "length": "2",
+          "text": "Panpsychism resurges."
+        },
+        {
+          "length": "9",
+          "text": "The theory that consciousness permeates reality is regaining traction."
+        },
+        {
+          "length": "16",
+          "text": "Panpsychism, the idea that everything has consciousness, is resurging as science questions what matter really is."
+        },
+        {
+          "length": "24",
+          "text": "The ancient view that consciousness is fundamental to reality is making a comeback as science reveals matter to be less concrete than we thought."
+        },
+        {
+          "length": "32",
+          "text": "The radical idea that consciousness pervades the universe, long dismissed in mainstream Western thought, is experiencing a renaissance as new scientific discoveries challenge the prevailing view of matter as lifeless and mechanical."
+        }
+      ]
+    }
+  ]
+}
