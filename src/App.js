@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 function App() {
   const [jsonData, setJsonData] = useState(null);
   const [selectedLength, setSelectedLength] = useState(null); // state for currently selected button
+  const [selectedSummaryIndex, setSelectedSummaryIndex] = useState(0);
 
   useEffect(() => {
     // Fetch the JSON data from the public folder
@@ -16,38 +17,86 @@ function App() {
 
   return (
     <div className="App">
-      <h1>summaries over scale</h1>
+      <div className="header">
+        <h1>summaries across lengths</h1>
+        {jsonData && (
+          // Add a link to the article
+          <div className="info">
+            <p>
+              This is an prototype to illustrate summaries of a given article at
+              a range of lengths written by AI. The article here is{" "}
+              <a
+                href={jsonData.articles[0].url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {jsonData.articles[0].title}
+              </a>{" "}
+              which is one of my favorite longreads. I highly recommend it.
+            </p>
+          </div>
+        )}
+      </div>
+
+      <div className="controls">
+        {/* Display the slider */}
+        {jsonData && (
+          <input
+            className="slider"
+            type="range"
+            min={0}
+            max={jsonData.articles[0].summaries.length - 1}
+            step={1}
+            value={selectedSummaryIndex}
+            onChange={(e) => setSelectedSummaryIndex(e.target.value)}
+          />
+        )}
+        {/* Display wordcount */}
+        {jsonData && (
+          <div className="wordcount">
+            Words:{" "}
+            {
+              jsonData.articles[0].summaries[
+                jsonData.articles[0].summaries.length - 1 - selectedSummaryIndex
+              ].text
+                .replace(/\r\n/g, "<br />")
+                .split(" ").length
+            }
+          </div>
+        )}
+        {/* Display the buttons 
+      <div className="button-container">
+        {jsonData &&
+          jsonData.articles[0].summaries
+            .slice()
+            .reverse()
+            .map((summary) => (
+              // Return a button for each summary
+              <button
+                key={summary.length}
+                onClick={() => setSelectedLength(summary.length)}
+                className={selectedLength === summary.length ? "selected" : ""}
+              >
+                {summary.length}
+              </button>
+            ))}
+      </div>
+      */}
+      </div>
+
+      {/* Display the text of the selected summary */}
+
       {jsonData && (
-        // Add a link to the article
-        <div>
-          <a
-            href={jsonData.articles[0].url}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {jsonData.articles[0].title}
-          </a>
+        <div className="text-container">
+          <div
+            dangerouslySetInnerHTML={{
+              __html: jsonData.articles[0].summaries[
+                jsonData.articles[0].summaries.length - 1 - selectedSummaryIndex
+              ].text.replace(/\r\n/g, "<br />"),
+            }}
+          />
         </div>
       )}
-      {jsonData &&
-        jsonData.articles[0].summaries.map((summary) => (
-          // Return a button for each summary
-          <button
-            key={summary.length}
-            onClick={() => setSelectedLength(summary.length)}
-          >
-            {summary.length}
-          </button>
-        ))}
-      {/* Display the text of the selected summary */}
-      {jsonData &&
-        jsonData.articles[0].summaries
-          .filter((summary) => summary.length === selectedLength)
-          .map((summary) => (
-            <div key={summary.length} className="text-container">
-              {summary.text}
-            </div>
-          ))}
     </div>
   );
 }
