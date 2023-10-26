@@ -30,7 +30,10 @@ function App() {
               >
                 {jsonData.articles[0].title}
               </a>{" "}
-              which is one of my favorite longreads. I highly recommend it.
+              which is one of my favorite longreads. I highly recommend it.{" "}
+              <a target="_blank" href="https://whichlight.com/">
+                ~whichlight
+              </a>
             </p>
           </div>
         )}
