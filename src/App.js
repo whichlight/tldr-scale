@@ -1,10 +1,8 @@
-import logo from "./logo.svg";
 import "./App.css";
 import React, { useEffect, useState } from "react";
 
 function App() {
   const [jsonData, setJsonData] = useState(null);
-  const [selectedLength, setSelectedLength] = useState(null); // state for currently selected button
   const [selectedSummaryIndex, setSelectedSummaryIndex] = useState(0);
 
   useEffect(() => {
@@ -64,24 +62,6 @@ function App() {
             }
           </div>
         )}
-        {/* Display the buttons 
-      <div className="button-container">
-        {jsonData &&
-          jsonData.articles[0].summaries
-            .slice()
-            .reverse()
-            .map((summary) => (
-              // Return a button for each summary
-              <button
-                key={summary.length}
-                onClick={() => setSelectedLength(summary.length)}
-                className={selectedLength === summary.length ? "selected" : ""}
-              >
-                {summary.length}
-              </button>
-            ))}
-      </div>
-      */}
       </div>
 
       {/* Display the text of the selected summary */}
