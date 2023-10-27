@@ -57,9 +57,7 @@ function App() {
           <div className="wordcount">
             Words:{" "}
             {
-              jsonData.articles[0].summaries[
-                jsonData.articles[0].summaries.length - 1 - selectedSummaryIndex
-              ].text
+              jsonData.articles[0].summaries[selectedSummaryIndex].text
                 .replace(/\r\n/g, "<br />")
                 .split(" ").length
             }
@@ -74,7 +72,7 @@ function App() {
           <div
             dangerouslySetInnerHTML={{
               __html: jsonData.articles[0].summaries[
-                jsonData.articles[0].summaries.length - 1 - selectedSummaryIndex
+                selectedSummaryIndex
               ].text.replace(/\r\n/g, "<br />"),
             }}
           />
