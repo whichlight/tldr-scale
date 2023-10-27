@@ -5,16 +5,13 @@
   max-width: 400px; /* limiting the max-width to keep the text readable */
 }
 
-.header,
-.controls {
-}
-
 .App button {
   margin: 5px;
 }
 
 .info p {
   font-size: 1em;
+  margin-bottom: 0px;
 }
 
 .button-container {

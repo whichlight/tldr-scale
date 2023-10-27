@@ -35,6 +35,10 @@ function App() {
                 ~whichlight
               </a>
             </p>
+            <p>
+              Move the slider to increase the length of the article from two
+              words until the full article:
+            </p>
           </div>
         )}
       </div>
