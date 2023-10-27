@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 
 function App() {
   const [jsonData, setJsonData] = useState(null);
-  const [selectedSummaryIndex, setSelectedSummaryIndex] = useState(0);
+  const [selectedSummaryIndex, setSelectedSummaryIndex] = useState(6);
 
   useEffect(() => {
     // Fetch the JSON data from the public folder
