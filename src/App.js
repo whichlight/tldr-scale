@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 function App() {
   const [jsonData, setJsonData] = useState(null);
   const [selectedSummaryIndex, setSelectedSummaryIndex] = useState(6);
+  const [summaryLengths, setSummaryLengths] = useState(null);
 
   useEffect(() => {
     // Fetch the JSON data from the public folder
@@ -12,6 +13,27 @@ function App() {
       .then((data) => setJsonData(data))
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
+
+  //update length
+  useEffect(() => {
+    if (jsonData) {
+      const lengths = jsonData.articles[0].summaries.map(
+        (summary) => summary.text.replace(/\r\n/g, "<br />").split(" ").length
+      );
+      setSummaryLengths(lengths);
+    }
+  }, [jsonData]);
+
+  function roundToThreeSignificantDigits(number) {
+    if (number === 0) {
+      return "0";
+    }
+
+    const exponent = Math.floor(Math.log10(Math.abs(number)));
+    const multiplier = Math.pow(10, 2 - exponent);
+
+    return (Math.round(number * multiplier) / multiplier).toString();
+  }
 
   return (
     <div className="App">
@@ -36,8 +58,8 @@ function App() {
               </a>
             </p>
             <p>
-              Move the slider to increase the length of the article from two
-              words until the full article:
+              Move the slider to increase the length from two words until the
+              full article:
             </p>
           </div>
         )}
@@ -57,14 +79,14 @@ function App() {
           />
         )}
         {/* Display wordcount */}
-        {jsonData && (
+        {jsonData && summaryLengths && (
           <div className="wordcount">
-            Words:{" "}
-            {
-              jsonData.articles[0].summaries[selectedSummaryIndex].text
-                .replace(/\r\n/g, "<br />")
-                .split(" ").length
-            }
+            {summaryLengths[selectedSummaryIndex]} words and{" "}
+            {roundToThreeSignificantDigits(
+              (100 * summaryLengths[selectedSummaryIndex]) /
+                summaryLengths[summaryLengths.length - 1]
+            )}
+            % the length of the original article
           </div>
         )}
       </div>
